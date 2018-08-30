@@ -68,8 +68,7 @@ TBD
 
 ## TODO
 1. Allow the timestamp (i.e. `-tt`) parser to extract more than one column (support for multiple columns).
-2. Allow the `-tt` flag to convert to a unix timestamp and vice versa. Use a source format and destination format for the time transformation.
-2.1 Implement a `-tf` flag for time format which gets a format as input.
+2. Allow the `-tt` flag to convert to a unix timestamp and vice versa. Use a source format and destination format for the time transformation. Implement a `-tf` flag for time format which gets a format as input.
 3. Add support for `-ct` to allow empty strings or nonetypes to transform to any given value.
 5. BUG: FIX bug where no error is thrown if a column in header is NOT present which is given for deletion, transformation or timetransforming.
 6. Add support for verbose output and quiet output (i.e. show how much lines have already been processed and how much are ahead etc).
