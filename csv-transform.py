@@ -4,12 +4,12 @@ import datetime
 import argparse
 import re
 
-version = 0.4
+version = '0.1'
 
 def define_args():
     parser = argparse.ArgumentParser(description='Transform/Modify a given csv file')
     parser.add_argument('-f','--file', metavar='inputfile', required=True,
-                        help='The input file that should be processed. Needs to be a comma separated file (i.e. csv file)')
+                        help='The input file that should be processed. Needs to be a comma separated file (i.e. csv file) with a header')
     parser.add_argument('-o','--output', metavar='ofile', required=False,
                         help='The name or path of/to the output file. The output file will be saved in the same directory where the script was executed from if no path is given')
     parser.add_argument('-c','--count', metavar='count', required=False,
@@ -22,7 +22,7 @@ def define_args():
                         help='Converts a columns value into a specific value. Use the column name of the header (e.g. \'-ct IsEventData:0->f,1->t;ValueStatus:0->f,1->t\')')
     parser.add_argument('-ca','--columnadd', metavar='column(s)', required=False,
                         help='Adds new columns with a given value to the file (e.g. \'-ca ColumnName:ColumnValue,AnotherColumnName:AnotherColumnValue\')')
-    parser.add_argument('-v', '--version', action='version', version='%(prog)s v{}'.format(version))
+    parser.add_argument('-v', '--version', action='version', version='{} v{}'.format(sys.argv[0].replace('.py',''), version))
     args = parser.parse_args()
     
     try:
