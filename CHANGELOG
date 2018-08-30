@@ -1,0 +1,19 @@
+# Changelog
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
+and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
+
+## [v0.1] - 2018-08-30
+### Added
+- Added a CHANGELOG.md to communicate (breaking) changes
+- Added support for transforming a csv file and its columns
+- Added argument parser
+- Added further functionality for:
+  - deleting columns
+  - adding new columns
+  - transforming UTC datetime timestamps to unix nanoseconds
+  - declaring an output file and path
+  - setting a count argument that limits the number of lines being processed
+### Changed
+### Removed
