@@ -88,8 +88,8 @@ Currently the only special expressions available are the following listed in the
 
 #### Further Usage
 When using special expressions with the `--columntransform` argument, it is also possible to transform a date, datetime or other formats of timestamps to a unix timestamp and vice versa.
-When doing so, the source format has to be correct and also a desired output format has to be declared.
-**Example1:** `-ct dateTime:@timestamp{%Y-%m-%d %H:%M:%S.f}->@unix{millis}`
-**Example2:** `-ct dateTime:@unix{millis}->@timestamp{%Y-%m-%d %H:%M:%S.f}`
+When doing so, the source format has to be correct and also a desired output format has to be declared.<br>
+**Example1:** `-ct dateTime:@timestamp{%Y-%m-%d %H:%M:%S.f}->@unix{millis}`<br>
+**Example2:** `-ct dateTime:@unix{millis}->@timestamp{%Y-%m-%d %H:%M:%S.f}`<br>
 In Example1, a transformation is done on the timestamps in the dateTime column. In this case, the original timestamps have to be in the given format and the output format will be in milliseconds.
 In Example2, the column dateTime holds unix timestamps in milliseconds that should be transformed to a datetime timestamp with the given format.
