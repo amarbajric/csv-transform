@@ -4,7 +4,7 @@ import datetime
 import argparse
 import re
 
-version = '0.2'
+version = '0.2.1'
 special_expressions = ['@timestamp', '@unix']
 unix_mapping = {'millis': 1000, 'micros': 1000000, 'nanos': 1000000000}
 
@@ -119,10 +119,18 @@ def remap_c_names(c_names, row):
             c_names[column_name] = (None, i)
     return c_names
 
+def check_for_header(csv_file):
+    try:
+        sniffer = csv.Sniffer()
+        has_header = sniffer.has_header(csv_file_read.read(2048))
+    except:
+        raise Exception("The inputfile does not seem to be a valid csv file with a header!")
+
 def readCsv():
     try:
         args = define_args()
         with open(args.file, mode='r') as csv_file_read:
+            check_for_header(csv_file_read)
             csv_reader = csv.reader(csv_file_read, delimiter=',')
             if args.output != None:
                 csv_file_write = open(args.output, mode='w')
