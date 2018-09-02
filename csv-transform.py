@@ -4,7 +4,7 @@ import datetime
 import argparse
 import re
 
-version = '0.2.1'
+version = '0.2.2'
 special_expressions = ['@timestamp', '@unix']
 unix_mapping = {'millis': 1000, 'micros': 1000000, 'nanos': 1000000000}
 
@@ -122,7 +122,7 @@ def remap_c_names(c_names, row):
 def check_for_header(csv_file):
     try:
         sniffer = csv.Sniffer()
-        has_header = sniffer.has_header(csv_file_read.read(2048))
+        has_header = sniffer.has_header(csv_file.read(2048))
     except:
         raise Exception("The inputfile does not seem to be a valid csv file with a header!")
 

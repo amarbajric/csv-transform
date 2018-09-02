@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [v0.2.2] - 2018-09-02
+### Added
+### Changed
+- Fixed bug where even valid csv files would be not recognized as such by the csv sniffer due to incorrect variable usage
+  - Note: Need testing asap O.O
+### Removed
+
 ## [v0.2.1] - 2018-08-31
 ### Added
 - Added csv sniffer which checks for a valid header in the given inputfile
