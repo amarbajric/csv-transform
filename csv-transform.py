@@ -4,7 +4,7 @@ import datetime
 import argparse
 import re
 
-version = '0.2.2'
+version = '0.2.3'
 special_expressions = ['@timestamp', '@unix']
 unix_mapping = {'millis': 1000, 'micros': 1000000, 'nanos': 1000000000}
 
@@ -131,6 +131,7 @@ def readCsv():
         args = define_args()
         with open(args.file, mode='r') as csv_file_read:
             check_for_header(csv_file_read)
+            csv_file_read.seek(0)
             csv_reader = csv.reader(csv_file_read, delimiter=',')
             if args.output != None:
                 csv_file_write = open(args.output, mode='w')

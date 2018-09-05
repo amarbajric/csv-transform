@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [v0.2.3] - 2018-09-05
+### Added
+### Changed
+- Fixed bug where the csv sniffer would leave the file seeker (i.e. current position of pointer in file) at byte 2048 instead of
+returning it to the beginning. Hence the csv file was not read correctly
+  - Fixed by setting pointer to the beginning of the file after header check with `.seek(0)`
+### Removed
+
 ## [v0.2.2] - 2018-09-02
 ### Added
 ### Changed
