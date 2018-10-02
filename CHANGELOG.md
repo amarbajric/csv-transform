@@ -4,6 +4,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [v0.3.0] - 2018-10-02
+### Added
+- ProgressBar in CLI to show the exact progress of the transformation
+- Debug functionality added
+  - With the argument `-d` or `--debug` every transformed row will be printed to the cli instead of
+  being written into a new file. This allows for fast debugging and checking if the transformation meets
+  the desired output. Can be combined with `-l` or `--limit`.
+  - The `transform_csv()` function also returns an array of arrays (where each nested array represents one 
+  transformed row) when debugging is enabled. Useful for testing and further debugging purposes.
+- Initial directory `test` with and initial test file
+  - Still empty test suite. Tests will be implemented in the next cycle (hopefully).
+### Changed
+- `-c` and `--count` changed to `-l` and `--limit` which makes a little bit more sense
+- `@timestamp{}` and `@unix{}` have been merged into the expression `@timestamp`. See the "Remove" section or
+documentation for usage explanation.
+- After a successful transformation, the program prints `Transformed <int> lines!` instead of `Modified <int> lines!`
+- Internal code changes
+  - Errors are now handled by a separate function
+  - Some error statements have been adapted
+  - Some adaptations to functions and code blocks
+### Removed
+- Special expression `@unix{}` was removed. This expression was merged into the `@timestamp{}` expression.
+  - Usage: `@timestamp{unix:millis|micros|nanos}`
+
 ## [v0.2.3] - 2018-09-05
 ### Added
 ### Changed
@@ -16,7 +40,7 @@ returning it to the beginning. Hence the csv file was not read correctly
 ### Added
 ### Changed
 - Fixed bug where even valid csv files would be not recognized as such by the csv sniffer due to incorrect variable usage
-  - Note: Need testing asap O.O
+  - Note: Need testing asap!
 ### Removed
 
 ## [v0.2.1] - 2018-08-31

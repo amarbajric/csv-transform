@@ -11,11 +11,11 @@ Development of this software is maintained by:
 ## Installation
 
 The script is making use of multiple modules coming from the [Python Standard Library](https://docs.python.org/2/library/).
-In this case, the only thing to worry about is a working python installation ;)
+In this case, the only thing to worry about is a working python installation :)
 
 ### Requirements
- - `Python v2.7+` (preferrably Python v2.7+ should be used as this script was not tested with Python3 yet!)
-   - Tested on the following Python version(s): 2.7.10
+ - `Python v2.7+` (preferably Python v2.7+ should be used as this script was written for Python 2.7+ only!)
+   - Tested on the following Python version: `2.7.10`
 
 
 ## Dependencies
@@ -42,24 +42,25 @@ The currently supported arguments are the following:
                         The name or path of/to the output file. The output
                         file will be saved in the same directory where the
                         script was executed from if no path is given
-  -c count, --count count
+  -l limit, --limit limit
                         number of lines the program should process. Always
-                        starts from row zero to the specified count
+                        starts from row zero to the specified limit
+  -d, --debug           Prints each transformed row to the CLI instead of
+                        writing it to a new file. Can be combined with '-l' or
+                        '--limit' to limit results in the CLI
   -cd column(s), --columndelete column(s)
                         Columns that should be deleted. Use the column names
                         of the header and separate multiple entries with a
-                        comma (e.g. '-d ID,UnitID')
+                        comma.
   -ct column(s), --columntransform column(s)
                         Converts a columns value into a specific value. Use
-                        the column name of the header (e.g. '-ct
-                        IsEventData:0->f,1->t;ValueStatus:0->f,1->t') Special
-                        expressions are supported. Check out the documentation
-                        for more information!
+                        the column name of the header. Special expressions are
+                        supported. Check out the documentation for more
+                        information!
   -ca column(s), --columnadd column(s)
-                        Adds new columns with a given value to the file (e.g.
-                        '-ca ColumnName:ColumnValue,AnotherColumnName:AnotherC
-                        olumnValue') Special expressions are supported. Check
-                        out the documentation for more information!
+                        Adds new columns with a given value to the file
+                        Special expressions are supported. Check out the
+                        documentation for more information!
   -v, --version         show program's version number and exit
 ```
 
@@ -83,13 +84,4 @@ Currently the only special expressions available are the following listed in the
 
 | Special Expression  | Description                                              | Examples                                |
 | --------------------|:---------------------------------------------------------|:--------------------------------------- |
-| `@timestamp{FORMAT}` | The `timestamp` expression allows for transforming or creating timestamps like dates or datetimes. The `FORMAT` placeholder should be replaced with a valid timestamp format like `%Y-%m-%d %H:%M:%S.f` or other combinations. Check out the [documentation](https://docs.python.org/2/library/datetime.html#strftime-and-strptime-behavior) of the python `datetime` module where all directives are described. If using the timestamp expression with the `--columntransform` argument, the part on the left of the `->` sign defines that the given column in the original file has a timestamp with the given `FORMAT`. The right part of the `->` sign defines the desired timestamp and `FORMAT` | `-ca dateColumn:@timestamp{%Y-%m-%d}`<br>`-ct dateColumn:@timestamp{%Y-%m-%d}->@timestamp{%Y-%m-%d %H:%M:%S.f}` |
-| `@unix{FORMAT}` | The `unix` expression allows for transforming or creating timestamps to the the unix representation. The `FORMAT` placeholder should be replaced with one of the following options: `millis, micros, nanos`. (`millis`=Milliseconds, `micros`=Microseconds, `nanos`=Nanoseconds) | `-ca unixColumn:@unix{millis}`<br>`-ct unixColumn:@unix{millis}->@unix{nanos}` |
-
-#### Further Usage
-When using special expressions with the `--columntransform` argument, it is also possible to transform a date, datetime or other formats of timestamps to a unix timestamp and vice versa.
-When doing so, the source format has to be correct and also a desired output format has to be declared.<br>
-**Example1:** `-ct dateTime:@timestamp{%Y-%m-%d %H:%M:%S.f}->@unix{millis}`<br>
-**Example2:** `-ct dateTime:@unix{millis}->@timestamp{%Y-%m-%d %H:%M:%S.f}`<br>
-In Example1, a transformation is done on the timestamps in the dateTime column. In this case, the original timestamps have to be in the given format and the output format will be in milliseconds.
-In Example2, the column dateTime holds unix timestamps in milliseconds that should be transformed to a datetime timestamp with the given format.
+| `@timestamp{FORMAT}` | The `timestamp` expression allows for transforming or creating timestamps like dates or datetimes. The `FORMAT` placeholder should be either replaced by using the keyword `unix:` and followed by a precision keyword like `millis, micros` or `nanos`. (`millis`=Milliseconds, `micros`=Microseconds, `nanos`=Nanoseconds) or with a valid timestamp format like `%Y-%m-%d %H:%M:%S.f`. Check out the [documentation](https://docs.python.org/2/library/datetime.html#strftime-and-strptime-behavior) of the python `datetime` module where all directives are described. If using the timestamp expression with the `--columntransform` argument, the part on the left of the `->` sign defines that the given column in the original file has a timestamp with the given `FORMAT`. The right part of the `->` sign defines the desired timestamp and `FORMAT` | `-ca dateColumn:@timestamp{unix:millis}`<br>`-ct dateColumn:@timestamp{%Y-%m-%d}->@timestamp{%Y-%m-%d %H:%M:%S.f}` |
